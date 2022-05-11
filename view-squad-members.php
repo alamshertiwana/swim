@@ -15,6 +15,12 @@
 
 <?php
 
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='coach') ){
+    }
+    else{
+        die("Only a coach can access this page");
+    }  
+
     $squad_id = 0;
 
     if( isset( $_GET["id"] ) ){

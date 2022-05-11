@@ -17,9 +17,12 @@
 
     $coach_id = 0;
 
-    if( isset( $_SESSION["type"] ) ){
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='coach') ){
         $coach_id = $_SESSION["ID"];        
     }
+    else{
+        die("Only a coach can access this page");
+    }    
     
     $add_training_front = new Add_Training_Front();
 

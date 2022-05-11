@@ -17,8 +17,11 @@
 
     $coach_id = 0;
 
-    if( isset( $_SESSION["type"] ) ){
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='coach') ){
         $coach_id = $_SESSION["ID"];        
+    }
+    else{
+        die("Only a coach can access this page");
     }
 
     $view_squads = new View_Squads_Front();
