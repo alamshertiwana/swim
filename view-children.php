@@ -7,6 +7,7 @@
         
         require_once("config.php");
         require_once("app/class-view-children-front.php");
+        require_once("app/class-validation-helper.php");
 ?>
 
     <body>
@@ -28,6 +29,7 @@
 
     $users = $view_children->get_users($parent_id);
 
+    $validation     = new Validation_Helper();
 ?>
 
     <div class="container-fluid">
@@ -66,7 +68,12 @@
                                     echo "<td>$user[FIRST_NAME]</td>";
                                     echo "<td>$user[LAST_NAME]</td>";
                                     echo "<td>$user[SEX]</td>";
-                                    echo "<td><a href=\"view-user.php?user=$user[ID]\">View Details</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"edit-user.php?user=$user[ID]\">Edit Details</a></td>";
+                                    if($validation->is_adult($user['DOB'])){
+                                        echo "<td><a href=\"view-user.php?user=$user[ID]\">View Details</a></td>";
+                                    }
+                                    else{
+                                        echo "<td><a href=\"view-user.php?user=$user[ID]\">View Details</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"edit-user.php?user=$user[ID]\">Edit Details</a></td>";
+                                    }
                                     echo '</tr>';
                                 }
                             ?>
