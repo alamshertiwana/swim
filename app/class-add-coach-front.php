@@ -63,14 +63,34 @@ class Add_Coach_Front {
             $pass = false;
         }
 
+        $check_passed = $this->check_unique_username($data);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The Username is already in use.');
+            $pass = false;
+        }        
+
         if($pass){
             $coach_gateway->insert_coach($data);
         }
 
         $output['pass'] = $pass;
-        
+
         return $output;
     }
+
+    //Function returns true if no other records are found using the same username
+    function check_unique_username($data){
+
+        $coach_gateway = new Coach_Gateway();
+
+        $coaches = $coach_gateway->get_coach_by_username($data);
+
+        if( empty($coaches) )
+            return true;
+        else 
+            return false;
+    }    
 
 }
 
