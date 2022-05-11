@@ -78,6 +78,9 @@
             if( $validation->is_adult($user['DOB']) && $_SESSION['type'] == 'parent' ){
                 die('Adult swimmers are responsible for editing their own details');
             }
+            if( $validation->is_adult($user['DOB']) == false && $_SESSION['type'] == 'user' ){
+                die('Please ask you parents to update your details');
+            }
         
         }
     }
