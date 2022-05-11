@@ -15,6 +15,12 @@
 
 <?php
 
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='admin') ){
+    }
+    else{
+        die("Only an admin can add races.");
+    }
+
     $view_coaches = new View_Coaches_Front();
 
     $coaches = $view_coaches->get_coaches();
