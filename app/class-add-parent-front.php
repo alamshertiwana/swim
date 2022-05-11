@@ -30,35 +30,42 @@ class Add_Parent_Front {
         $check_passed = $validation->validate_email($data['email']);
 
         if($check_passed == false){
-            array_push($output['error'], 'Please enter a valid email address');
+            array_push($output['error'], 'Please enter a valid email address.');
             $pass = false;
         }
 
         $check_passed = $validation->validate_name_length($data['first_name']);
 
         if($check_passed == false){
-            array_push($output['error'], 'The first name cannot be longer than 50 characters');
+            array_push($output['error'], 'The first name cannot be longer than 50 characters.');
             $pass = false;
         }
         
         $check_passed = $validation->validate_name_length($data['last_name']);
 
         if($check_passed == false){
-            array_push($output['error'], 'The last name cannot be longer than 50 characters');
+            array_push($output['error'], 'The last name cannot be longer than 50 characters.');
             $pass = false;
-        }        
+        }
+        
+        $check_passed = ctype_digit($data['telephone']);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The telephone can only contain numbers.');
+            $pass = false;
+        }         
         
         $check_passed = $this->check_unique_username($data);
 
         if($check_passed == false){
-            array_push($output['error'], 'The Username is already in use');
+            array_push($output['error'], 'The Username is already in use.');
             $pass = false;
         }
         
         $check_passed = $this->check_unique_email($data);
 
         if($check_passed == false){
-            array_push($output['error'], 'The Email is already registered');
+            array_push($output['error'], 'The Email is already registered.');
             $pass = false;
         }        
 
