@@ -21,7 +21,7 @@
         </a>
       </li>                
       <li class="nav-item">
-        <a class="nav-link" href="edit-user.php">
+        <a class="nav-link" href="edit-user.php?user=<?php echo $_SESSION['ID']; ?>">
           <span data-feather="edit-2"></span>
           Edit Details
         </a>

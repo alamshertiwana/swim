@@ -24,7 +24,7 @@
         if( $_SESSION["type"] == "parent" ){
             $parent_id = $_SESSION["ID"];
         }
-        else if( $_SESSION["type"] == "swimmer" ){
+        else if( $_SESSION["type"] == "user" ){
             
             if( $_SESSION["ID"]!= $_GET["user"] ){
                 die("You can only edit your own details");
@@ -69,7 +69,7 @@
         if( !(isset($user_obj)) ){
             die("Not allowed to access user details");
         }
-        else if( ($user_obj['PARENT1_ID']== $parent_id || $user_obj['PARENT2_ID']== $parent_id || $is_admin) ){
+        else if( ($user_obj['PARENT1_ID']== $parent_id || $user_obj['PARENT2_ID']== $parent_id || $is_admin || $_SESSION['type'] == 'user' ) ){
             $user = $user_obj;
         }
     }
