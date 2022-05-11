@@ -55,7 +55,13 @@
                                     echo "<td>$gala[ID]</td>";
                                     echo "<td>$gala[NAME]</td>";
                                     echo "<td>$gala[DATE]</td>";
-                                    echo '<td><a href="add-race.php?gala='.$gala['ID'].'">Add Race</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="view-races.php?gala='.$gala['ID'].'">View Races</a></td>';
+                                    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='admin') ){
+                                        echo '<td><a href="add-race.php?gala='.$gala['ID'].'">Add Race</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="view-races.php?gala='.$gala['ID'].'">View Races</a></td>';
+
+                                    }
+                                    else{
+                                        echo '<td><a href="view-races.php?gala='.$gala['ID'].'">View Races</a></td>';
+                                    }                                    
                                     echo '</tr>';
                                 }
                             ?>
