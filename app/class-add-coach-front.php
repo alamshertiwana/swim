@@ -68,6 +68,13 @@ class Add_Coach_Front {
         if($check_passed == false){
             array_push($output['error'], 'The Username is already in use.');
             $pass = false;
+        }
+        
+        $check_passed = $this->check_unique_email($data);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The Email is already registered.');
+            $pass = false;
         }        
 
         if($pass){
@@ -91,6 +98,18 @@ class Add_Coach_Front {
         else 
             return false;
     }    
+
+    function check_unique_email($data){
+
+        $coach_gateway = new Coach_Gateway();
+
+        $coaches = $coach_gateway->get_coach_by_email($data);
+
+        if( empty($coaches) )
+            return true;
+        else 
+            return false;
+    }
 
 }
 

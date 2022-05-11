@@ -90,6 +90,28 @@ class Coach_Gateway {
         
         return $coaches;
     }
+
+    function get_coach_by_email($data){
+        $db = new DB_Manager;
+        $conn = $db->get_connection();
+        
+        // prepare and bind
+        $stmt = $conn->prepare("SELECT * FROM coach WHERE EMAIL = ?");        
+        $stmt->bind_param("s", $email);
+
+        // set parameters and execute
+        $email = $data['email'];      
+        
+        $stmt->execute();
+
+        $result     = $stmt->get_result();
+        $coaches    = $result->fetch_all(MYSQLI_ASSOC);
+                
+        $stmt->close();
+        $conn->close();
+        
+        return $coaches;
+    }    
   
 }
 
