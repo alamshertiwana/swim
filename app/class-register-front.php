@@ -63,6 +63,13 @@ class Register_Front {
             $pass = false;
         }
 
+        $check_passed = $this->check_unique_username($data);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The Username is already in use.');
+            $pass = false;
+        }        
+
         $check_passed = $this->check_unique_email($data);
 
         if($check_passed == false){
@@ -78,6 +85,19 @@ class Register_Front {
 
         return $output;
     }
+
+    //Function returns true if no other records are found using the same username
+    function check_unique_username($data){
+
+        $user_gateway = new User_Gateway();
+
+        $users = $user_gateway->get_user_by_username($data);
+
+        if( empty($users) )
+            return true;
+        else 
+            return false;
+    }    
 
     function check_unique_email($data){
 
