@@ -63,6 +63,13 @@ class Register_Front {
             $pass = false;
         }
 
+        $check_passed = $this->check_unique_email($data);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The Email is already registered.');
+            $pass = false;
+        }        
+
         if($pass){
             $user_gateway->insert_user($data);
         }
@@ -72,7 +79,17 @@ class Register_Front {
         return $output;
     }
 
+    function check_unique_email($data){
 
+        $user_gateway = new User_Gateway();
+
+        $users = $user_gateway->get_user_by_email($data);
+
+        if( empty($users) )
+            return true;
+        else 
+            return false;
+    }    
   
 }
 

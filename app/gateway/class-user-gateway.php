@@ -224,7 +224,29 @@ class User_Gateway {
         $conn->close();
         
         return $coaches;
-    }    
+    }
+    
+    function get_user_by_email($data){
+        $db = new DB_Manager;
+        $conn = $db->get_connection();
+        
+        // prepare and bind
+        $stmt = $conn->prepare("SELECT * FROM users WHERE EMAIL = ?");        
+        $stmt->bind_param("s", $email);
+
+        // set parameters and execute
+        $email = $data['email'];      
+        
+        $stmt->execute();
+
+        $result     = $stmt->get_result();
+        $users    = $result->fetch_all(MYSQLI_ASSOC);
+                
+        $stmt->close();
+        $conn->close();
+        
+        return $users;
+    }     
   
 }
 
