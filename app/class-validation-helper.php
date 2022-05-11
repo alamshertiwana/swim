@@ -46,6 +46,17 @@ class Validation_Helper {
 
     }
 
+    function validate_name_length($name){
+        
+        if(strlen($name) >50){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
+
 
   
 }
