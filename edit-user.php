@@ -70,7 +70,15 @@
             die("Not allowed to access user details");
         }
         else if( ($user_obj['PARENT1_ID']== $parent_id || $user_obj['PARENT2_ID']== $parent_id || $is_admin || $_SESSION['type'] == 'user' ) ){
+
             $user = $user_obj;
+            
+            $validation     = new Validation_Helper();
+            
+            if( $validation->is_adult($user['DOB']) && $_SESSION['type'] == 'parent' ){
+                die('Adult swimmers are responsible for editing their own details');
+            }
+        
         }
     }
     else{
