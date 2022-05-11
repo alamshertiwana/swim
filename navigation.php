@@ -1,4 +1,17 @@
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+<?php
+
+  if(isset($_SESSION['type'])){
+    include('template/navigation-admin.php');
+  }
+  else{
+    echo 'Please login to see navigation <a href="index.php">Login</a>';
+  }
+  
+
+?>
+
+<!--
+  <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
@@ -129,3 +142,4 @@
         </ul>
       </div>
     </nav>
+-->
