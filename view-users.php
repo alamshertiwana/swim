@@ -1,4 +1,5 @@
 <?php   
+        session_start();
         global $page_title;
         $page_title ="View Users";
 
@@ -47,8 +48,6 @@
                                 <th scope="col">DOB</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Telephone</th>
-                                <th scope="col">Address</th>
-                                <th scope="col">Postcode</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
@@ -66,9 +65,7 @@
                                     echo "<td>$user[DOB]</td>";
                                     echo "<td>$user[EMAIL]</td>";
                                     echo "<td>$user[TELEPHONE]</td>";
-                                    echo "<td>$user[ADDRESS]</td>";
-                                    echo "<td>$user[POSTCODE]</td>";
-                                    echo "<td><a href=\"assign-parent.php?user=$user[ID]\">Assign Parent</td>";
+                                    echo "<td><a href=\"assign-parent.php?user=$user[ID]\">Assign Parent</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"view-user.php?user=$user[ID]\">View Details</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href=\"edit-user.php?user=$user[ID]\">Edit Details</a></td>";
                                     echo '</tr>';
                                 }
                             ?>
