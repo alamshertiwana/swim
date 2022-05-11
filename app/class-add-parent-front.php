@@ -33,6 +33,20 @@ class Add_Parent_Front {
             array_push($output['error'], 'Please enter a valid email address');
             $pass = false;
         }
+
+        $check_passed = $validation->validate_name_length($data['first_name']);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The first name cannot be longer than 50 characters');
+            $pass = false;
+        }
+        
+        $check_passed = $validation->validate_name_length($data['last_name']);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The last name cannot be longer than 50 characters');
+            $pass = false;
+        }        
         
         $check_passed = $this->check_unique_username($data);
 
