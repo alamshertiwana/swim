@@ -78,7 +78,12 @@ class Add_Coach_Front {
         }        
 
         if($pass){
+
+            $hashed_password    = password_hash($data['password'], PASSWORD_DEFAULT);
+            $data['password']   = $hashed_password;
+
             $coach_gateway->insert_coach($data);
+        
         }
 
         $output['pass'] = $pass;
