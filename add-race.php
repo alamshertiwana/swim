@@ -14,6 +14,13 @@
     <?php include("header.php"); ?>
 
 <?php
+    
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='admin') ){
+    }
+    else{
+        die("Only an admin can add races.");
+    }
+
     if( isset($_POST["submit"]) ){
 
         $gala_id            = $_GET["gala"];
