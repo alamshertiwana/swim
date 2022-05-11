@@ -22,13 +22,7 @@ class Assign_Parent_Front {
 
         }
 
-        $pass = true;  //This will returned at the end as part of the $output array it is set to false if any validation fails
-
-        if($data["parent1_id"] == $data["parent2_id"]){
-            array_push($output['error'], 'Parent 1 and Parent 2 cannot be the same');
-            $pass = false;
-            $output['pass'] = $pass;            
-        }        
+        $pass = true;  //This will returned at the end as part of the $output array it is set to false if any validation fails       
 
         $required       = array("parent1_id","parent2_id","user_id");
         $validation     = new Validation_Helper();
@@ -40,7 +34,14 @@ class Assign_Parent_Front {
         if($check_passed == false){
             array_push($output['error'], 'Please make sure that all required values are filled.');
             $pass = false;
+            return $output;
         }
+
+        if($data["parent1_id"] == $data["parent2_id"]){
+            array_push($output['error'], 'Parent 1 and Parent 2 cannot be the same');
+            $pass = false;
+            $output['pass'] = $pass;            
+        }         
         
         if($pass){
             $user_gateway = new User_Gateway();
