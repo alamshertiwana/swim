@@ -37,7 +37,14 @@ class Add_Parent_Front {
         $check_passed = $this->check_unique_username($data);
 
         if($check_passed == false){
-            array_push($output['error'], 'The username is already in use');
+            array_push($output['error'], 'The Username is already in use');
+            $pass = false;
+        }
+        
+        $check_passed = $this->check_unique_email($data);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The Email is already registered');
             $pass = false;
         }        
 
@@ -57,6 +64,18 @@ class Add_Parent_Front {
         $parent_gateway = new Parent_Gateway();
         
         $parents = $parent_gateway->get_parent_by_username($data);
+
+        if( empty($parents) )
+            return true;
+        else 
+            return false;
+    }
+    
+    function check_unique_email($data){
+
+        $parent_gateway = new Parent_Gateway();
+        
+        $parents = $parent_gateway->get_parent_by_email($data);
 
         if( empty($parents) )
             return true;

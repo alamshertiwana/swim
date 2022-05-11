@@ -89,7 +89,29 @@ class Parent_Gateway {
         $conn->close();
         
         return $parents;
-    }     
+    }
+    
+    function get_parent_by_email($data){
+        $db = new DB_Manager;
+        $conn = $db->get_connection();
+        
+        // prepare and bind
+        $stmt = $conn->prepare("SELECT * FROM parent WHERE EMAIL = ?");        
+        $stmt->bind_param("s", $username);
+
+        // set parameters and execute
+        $username = $data['email'];      
+        
+        $stmt->execute();
+
+        $result     = $stmt->get_result();
+        $parents    = $result->fetch_all(MYSQLI_ASSOC);
+                
+        $stmt->close();
+        $conn->close();
+        
+        return $parents;
+    }    
   
 }
 
