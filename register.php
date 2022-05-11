@@ -14,9 +14,11 @@
 
 <?php
     if( isset($_POST["submit"]) ){
-        $formData = $_POST["RegisterForm"]; // dont forget to sanitize any post data
-        $register_front = new Register_Front();
-        $register_front->register_user($formData);
+
+        $formData           = $_POST["RegisterForm"]; 
+        $register_front     = new Register_Front();
+        $output             = $register_front->register_user($formData);
+
     }
 ?>
 
@@ -29,6 +31,30 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
 
                 <h2>Register Swimmer</h2>
+
+                <?php
+                    if( isset($output['pass']) && $output['pass']== true ){
+                ?>
+                <div class="alert alert-success" role="alert">
+                    <p class="mb-0"><strong>Success!</strong> The data was added successfully.</p>
+                </div>
+                <?php
+                    }
+                    elseif( isset($output['pass']) && $output['pass']== false ){
+                ?>
+                <div class="alert alert-danger" role="alert">
+                    <p class="mb-0"><strong>Error!</strong> Please fix the following issues :</p>
+                    <ul class="mb-0">
+                    <?php
+                        foreach ($output['error'] as $message) {
+                            echo "<li> $message </li>";
+                        }                        
+                    ?>
+                    </ul>
+                </div>
+                <?php
+                    }
+                ?>
 
                 <form action="register.php" method="post">
                     <div class="form-group mb-3">

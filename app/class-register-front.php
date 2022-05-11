@@ -1,6 +1,7 @@
 <?php
 
 require_once('class-db-manager.php');
+require_once("class-validation-helper.php");
 require_once('gateway\class-user-gateway.php');
 
 class Register_Front {
@@ -8,34 +9,67 @@ class Register_Front {
     function register_user($data){
 
         $user_gateway = new User_Gateway();
-        $user_gateway->insert_user($data);
-/*
-        $db = new DB_Manager;
-        $conn = $db->get_connection();
-        
-        // prepare and bind
-        $stmt = $conn->prepare("INSERT INTO users (ID, USERNAME, PASSWORD, FIRST_NAME, LAST_NAME,SEX, DOB, EMAIL, TELEPHONE, ADDRESS, POSTCODE, PARENT1_ID, PARENT2_ID, SQUAD_ID) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NULL, NULL, NULL)");
-        $stmt->bind_param("ssssssssss", $username, $password, $first_name, $last_name, $sex, $dob, $email, $telephone, $address, $postcode);
-        
-        // set parameters and execute
-        $username       = $data['username'];
-        $password       = $data['password'];
-        $first_name     = $data['first_name'];
-        $last_name      = $data['last_name'];
-        $sex            = $data['sex'];
-        $dob            = $data['dob'];
-        $email          = $data['email'];
-        $telephone      = $data['telephone'];
-        $address        = $data['address'];
-        $postcode       = $data['postcode'];
-        
-        $stmt->execute();
-                
-        $stmt->close();
-        $conn->close();        
-*/
 
+        //The "error" contains error messages. The "pass" is set to true at the end if all validation checks are passed.
+        $output = array("error"=> array(), "pass"=>false);
 
+        $pass = true;  //This will returned at the end as part of the $output array it is set to false if any validation fails        
+
+        $required       = array("username","password","first_name","last_name","email","sex","dob","telephone","address","postcode");
+        $validation     = new Validation_Helper();
+
+        $data           = $validation->trim_array($data);
+
+        $check_passed   = $validation->keys_in_array($data,$required);
+        
+        if($check_passed == false){
+            array_push($output['error'], 'Please make sure that all required values are filled.');
+            $pass = false;
+            return $output;
+        }
+        
+        $check_passed = $validation->validate_email($data['email']);
+
+        if($check_passed == false){
+            array_push($output['error'], 'Please enter a valid email address.');
+            $pass = false;
+        }
+
+        $check_passed = $validation->validate_name_length($data['first_name']);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The first name cannot be longer than 50 characters.');
+            $pass = false;
+        }
+        
+        $check_passed = $validation->validate_name_length($data['last_name']);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The last name cannot be longer than 50 characters.');
+            $pass = false;
+        }
+        
+        $check_passed = ctype_digit($data['telephone']);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The telephone can only contain numbers.');
+            $pass = false;
+        }
+        
+        $check_passed = $validation->validate_date($data['dob'],9);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The date of birth selected makes the age less than 18 years old.');
+            $pass = false;
+        }
+
+        if($pass){
+            $user_gateway->insert_user($data);
+        }
+
+        $output['pass'] = $pass;
+
+        return $output;
     }
 
 
