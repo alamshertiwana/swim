@@ -1,4 +1,5 @@
 <?php   
+        session_start();
         global $page_title;
         $page_title ="Race History";
 
