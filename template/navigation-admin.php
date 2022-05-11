@@ -54,13 +54,13 @@
     <ul class="nav flex-column">
       <li class="nav-item">
         <a class="nav-link" href="view-users.php">
-          <span data-feather="plus-circle"></span>
+          <span data-feather="eye"></span>
           View Users
         </a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="view-coaches.php">
-          <span data-feather="plus-circle"></span>
+          <span data-feather="eye"></span>
           View Coaches
         </a>
       </li>
