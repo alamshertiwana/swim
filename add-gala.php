@@ -14,6 +14,13 @@
     <?php include("header.php"); ?>
 
 <?php
+
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='admin') ){
+    }
+    else{
+        die("Only an admin can access this page");
+    }
+    
     if( isset($_POST["submit"]) ){
 
         $formData           = $_POST["AddGala"];
