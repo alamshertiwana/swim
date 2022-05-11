@@ -57,6 +57,23 @@ class Validation_Helper {
 
     }
 
+    //First input is the date of birth. Second input is the maximum age allowed. 
+    //If the age is less than the $min_age argument then it returns false 
+    function validate_date($date,$min_age){
+
+        $d1 = new DateTime();
+        $d2 = new DateTime($date);
+        
+        $diff = $d2->diff($d1);
+    
+        if( ($diff->y) < $min_age ){
+            return false;
+        }
+        else{
+            return true;
+        }
+
+    }
 
   
 }

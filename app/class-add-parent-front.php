@@ -53,6 +53,13 @@ class Add_Parent_Front {
         if($check_passed == false){
             array_push($output['error'], 'The telephone can only contain numbers.');
             $pass = false;
+        }
+        
+        $check_passed = $validation->validate_date($data['dob'],18);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The date of birth selected makes the age less than 18 years old.');
+            $pass = false;
         }         
         
         $check_passed = $this->check_unique_username($data);
