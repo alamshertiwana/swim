@@ -41,7 +41,7 @@ class Login_Front {
                 }
                 else{
 
-                    if(($data['password'] != $user[0]['PASSWORD']) ){
+                    if( !( password_verify($data['password'], $user[0]['PASSWORD'])) ) {
                         array_push($output['error'], 'The login details are incorrect.');
                         $pass = false;
                     }
@@ -65,7 +65,7 @@ class Login_Front {
                 }
                 else{
 
-                    if(($data['password'] != $user[0]['PASSWORD']) ){
+                    if( !( password_verify($data['password'], $user[0]['PASSWORD'])) ) {
                         array_push($output['error'], 'The login details are incorrect.');
                         $pass = false;
                     }
@@ -89,7 +89,7 @@ class Login_Front {
                 }
                 else{
 
-                    if(($data['password'] != $user[0]['PASSWORD']) ){
+                    if( !( password_verify($data['password'], $user[0]['PASSWORD'])) ) {
                         array_push($output['error'], 'The login details are incorrect.');
                         $pass = false;
                     }
