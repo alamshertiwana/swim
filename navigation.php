@@ -1,7 +1,14 @@
 <?php
 
   if(isset($_SESSION['type'])){
-    include('template/navigation-admin.php');
+
+    if( $_SESSION['type'] == 'admin' ){
+      include('template/navigation-admin.php');
+    }
+    else if( $_SESSION['type'] == 'coach' ){
+      include('template/navigation-coach.php');      
+    }
+  
   }
   else{
     echo 'Please login to see navigation <a href="index.php">Login</a>';
