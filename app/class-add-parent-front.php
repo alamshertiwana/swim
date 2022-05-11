@@ -8,6 +8,8 @@ class Add_Parent_Front {
 
     function add_parent($data){
 
+        $parent_gateway = new Parent_Gateway();
+
         //The "error" contains error messages. The "pass" is set to true at the end if all validation checks are passed.
         $output = array("error"=> array(), "pass"=>false);
 
@@ -27,8 +29,19 @@ class Add_Parent_Front {
         
         $check_passed = $validation->validate_email($data['email']);
 
+        if($check_passed == false){
+            array_push($output['error'], 'Please enter a valid email address');
+            $pass = false;
+        }
+        
+        $check_passed = $this->check_unique_username($data);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The username is already in use');
+            $pass = false;
+        }        
+
         if($pass){
-            $parent_gateway = new Parent_Gateway();
             $parent_gateway->insert_parent($data);
         }
 
@@ -37,6 +50,19 @@ class Add_Parent_Front {
         return $output;
 
     }
+
+    //Function returns true if no other records are found using the same username
+    function check_unique_username($data){
+
+        $parent_gateway = new Parent_Gateway();
+        
+        $parents = $parent_gateway->get_parent_by_username($data);
+
+        if( empty($parents) )
+            return true;
+        else 
+            return false;
+    }    
 
 }
 
