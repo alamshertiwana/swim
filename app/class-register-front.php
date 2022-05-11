@@ -78,7 +78,12 @@ class Register_Front {
         }        
 
         if($pass){
+
+            $hashed_password    = password_hash($data['password'], PASSWORD_DEFAULT);
+            $data['password']   = $hashed_password;
+
             $user_gateway->insert_user($data);
+
         }
 
         $output['pass'] = $pass;
