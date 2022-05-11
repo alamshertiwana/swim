@@ -77,7 +77,12 @@ class Add_Parent_Front {
         }        
 
         if($pass){
+
+            $hashed_password    = password_hash($data['password'], PASSWORD_DEFAULT);
+            $data['password']   = $hashed_password;
+
             $parent_gateway->insert_parent($data);
+        
         }
 
         $output['pass'] = $pass;
