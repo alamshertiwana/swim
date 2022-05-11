@@ -16,7 +16,7 @@
 <?php
 
     $parent_id  = 0;
-    $is_admin   = true;
+    $is_admin   = false;
 
     /*Users types that can access the page are Parent of Swimmer, Swimmer themself and an Admin*/
     if( isset( $_SESSION["type"] ) ){
