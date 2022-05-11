@@ -49,6 +49,29 @@ class Swimmers_Race_Gateway {
         $conn->close();
         
         return $coaches;
+    }
+    
+    function get_result_by_race_and_user($data){
+        $db = new DB_Manager;
+        $conn = $db->get_connection();
+        
+        // prepare and bind
+        $stmt = $conn->prepare("SELECT * FROM swimmers_race WHERE `USER_ID` = ? AND RACE_ID = ?");        
+        $stmt->bind_param("ss", $user_id,$race_id);
+
+        // set parameters and execute
+        $user_id = $data['user_id'];      
+        $race_id = $data['race_id'];      
+        
+        $stmt->execute();
+
+        $result     = $stmt->get_result();
+        $results    = $result->fetch_all(MYSQLI_ASSOC);
+                
+        $stmt->close();
+        $conn->close();
+        
+        return $results;
     }    
   
 }

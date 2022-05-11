@@ -24,6 +24,13 @@ class Add_Race_Entry_Front {
             array_push($output['error'], 'Please make sure that all required values are filled.');
             $pass = false;
         }
+
+        $check_passed = $this->check_unique_user_in_race($data);
+
+        if($check_passed == false){
+            array_push($output['error'], 'The swimmer has already been added to the race.');
+            $pass = false;
+        }         
         
         if($pass){
             $swimmers_race_gateway = new Swimmers_Race_Gateway();
@@ -42,6 +49,19 @@ class Add_Race_Entry_Front {
 
         return $users;
 
+    }
+    
+    //Function returns true if no other records are found using the same USER ID and RACE ID
+    function check_unique_user_in_race($data){
+
+        $swimmers_race_gateway = new Swimmers_Race_Gateway();
+
+        $results = $swimmers_race_gateway->get_result_by_race_and_user($data);
+
+        if( empty($results) )
+            return true;
+        else 
+            return false;
     }    
 
 }
