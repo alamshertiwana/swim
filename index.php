@@ -22,6 +22,10 @@
     
     }
 
+    if( isset($_SESSION['type']) ){
+        header( 'Location: dashboard.php' );        
+    }
+
 ?>
 
     <div class="container-fluid">
@@ -33,7 +37,6 @@
             <main class="col-md-8 ms-sm-auto px-md-4 pt-4">
 
                 <h1>Login</h1>
-                <?php echo $_SESSION["username"]. $_SESSION["type"] . $_SESSION["ID"]; ?>
 
                 <?php
                     if( isset($output['pass']) && $output['pass']== true ){
