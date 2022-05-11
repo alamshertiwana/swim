@@ -64,10 +64,10 @@
                         <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Username</th>
                                 <th scope="col">F. Name</th>
-                                <th scope="col">L. Name</th>
+                                <th scope="col">F. Name</th>
                                 <th scope="col">Sex</th>
+                                <th scope="col">DOB</th>
                                 <th scope="col">Action</th>
                             </tr>
                         </thead>
