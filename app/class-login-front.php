@@ -5,6 +5,7 @@ require_once("class-validation-helper.php");
 require_once('gateway\class-parent-gateway.php');
 require_once('gateway\class-coach-gateway.php');
 require_once('gateway\class-user-gateway.php');
+require_once('gateway\class-admin-gateway.php');
 
 class Login_Front {
 
@@ -96,6 +97,30 @@ class Login_Front {
                     else{
                         $_SESSION["username"]   = $user[0]['USERNAME'];
                         $_SESSION["type"]       = "parent";                        
+                        $_SESSION["ID"]         = $user[0]['ID'];                        
+                    }
+
+                }
+            }
+            
+            else if($data['user_type'] ==  'admin'){
+
+                $admin_gateway      = new Admin_Gateway();
+                $user               = $admin_gateway->login($data);
+
+                if(!isset($user) || empty($user)){
+                    array_push($output['error'], 'The login details are incorrect.');
+                    $pass = false;                
+                }
+                else{
+
+                    if( !( password_verify($data['password'], $user[0]['PASSWORD'])) ) {
+                        array_push($output['error'], 'The login details are incorrect.');
+                        $pass = false;
+                    }
+                    else{
+                        $_SESSION["username"]   = $user[0]['USERNAME'];
+                        $_SESSION["type"]       = "admin";                        
                         $_SESSION["ID"]         = $user[0]['ID'];                        
                     }
 
