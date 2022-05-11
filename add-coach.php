@@ -14,9 +14,11 @@
 
 <?php
     if( isset($_POST["submit"]) ){
-        $formData = $_POST["AddCoach"]; // dont forget to sanitize any post data
-        $add_coach_front = new Add_Coach_Front();
-        $add_coach_front->add_coach($formData);
+
+        $formData           = $_POST["AddCoach"]; 
+        $add_coach_front    = new Add_Coach_Front();
+        $output             = $add_coach_front->add_coach($formData);
+    
     }
 ?>
 
@@ -29,6 +31,31 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 pt-4">
 
                 <h1>Add Coach</h1>
+
+                <?php
+                    if( isset($output['pass']) && $output['pass']== true ){
+                ?>
+                <div class="alert alert-success" role="alert">
+                    <p class="mb-0"><strong>Success!</strong> The data was added successfully.</p>
+                </div>
+                <?php
+                    }
+                    elseif( isset($output['pass']) && $output['pass']== false ){
+                ?>
+                <div class="alert alert-danger" role="alert">
+                    <p class="mb-0"><strong>Error!</strong> Please fix the following issues :</p>
+                    <ul class="mb-0">
+                    <?php
+                        foreach ($output['error'] as $message) {
+                            echo "<li> $message </li>";
+                        }                        
+                    ?>
+                    </ul>
+                </div>
+                <?php
+                    }
+                ?>
+
                 <form action="add-coach.php" method="post">
                     <div class="form-group mb-3">
                         <label for="username">Username</label>
