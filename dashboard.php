@@ -54,49 +54,25 @@
 
       <div class="row">
         
-        <div class="col-md-4 mb-3">
+        <div class="col-md-6 mb-3">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Add Parent</h5>
-              <p class="card-text">Add a new parent using a form on this page.</p>
-              <a href="add-parent.php" class="card-link">Add Parent</a>
-            </div>
-          </div>      
-
-        </div>
-        
-        <div class="col-md-4 mb-3">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Add Coach</h5>
-              <p class="card-text">Add a new coach using a form on this page.</p>
-              <a href="add-coach.php" class="card-link">Add Coach</a>
+              <h5 class="card-title">Search & Filters</h5>
+              <p class="card-text">Use to search and filter feature. You can search using User ID, First Name or Last Name. Then you can further check the users Training or Race data. By default when you open the Search page it will be empty. This is by design.</p>
+              <a href="search-users.php" class="card-link">Search & Filter</a>
             </div>
           </div>      
 
         </div>
 
-        <div class="col-md-4 mb-3">
+        <div class="col-md-6 mb-3">
 
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Add Squad</h5>
-              <p class="card-text">Add a new squad using a form on this page.</p>
-              <a href="add-squad.php" class="card-link">Add Squad</a>
-            </div>
-          </div>      
-
-        </div>
-
-        <div class="col-md-4 mb-3">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Register</h5>
-              <p class="card-text">Register a new swimmer here.</p>
-              <a href="register.php" class="card-link">Register Swimmer</a>
+              <h5 class="card-title">View Gala</h5>
+              <p class="card-text">View Gala the list of all the Galas. You can then further check all the Races in each Gala. You can check the results for each Race.</p>
+              <a href="view-gala.php" class="card-link">View Gala</a>
             </div>
           </div>      
 
