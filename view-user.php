@@ -15,7 +15,8 @@
 
 <?php
 
-    $parent_id = 0;
+    $parent_id  = 0;
+    $is_admin   = true;
 
     /*Users types that can access the page are Parent of Swimmer, Swimmer themself and an Admin*/
     if( isset( $_SESSION["type"] ) ){
@@ -30,6 +31,9 @@
             }
         
         }
+        else if( $_SESSION["type"] == "admin" ){
+            $is_admin = true;        
+        }        
         else if( $_SESSION["type"] != "admin" ){
             die("Not allowed to access this page");
         }        
@@ -49,7 +53,7 @@
         if( !(isset($user_obj)) ){
             die("Not allowed to access user details");
         }
-        else if( ($user_obj['PARENT1_ID']== $parent_id || $user_obj['PARENT2_ID']== $parent_id) ){
+        else if( ($user_obj['PARENT1_ID']== $parent_id || $user_obj['PARENT2_ID']== $parent_id) || $is_admin){
             $user = $user_obj;
         }
     }
