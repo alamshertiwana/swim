@@ -11,6 +11,9 @@
     else if( $_SESSION['type'] == 'parent' ){
       include('template/navigation-parent.php');      
     }
+    else if( $_SESSION['type'] == 'user' ){
+      include('template/navigation-swimmer.php');      
+    }
   
   }
   else{
