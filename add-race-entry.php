@@ -14,6 +14,12 @@
     <?php include("header.php"); ?>
 
 <?php
+
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='admin') ){
+    }
+    else{
+        die("Only an admin can add entries in a race.");
+    }
     
     $add_race_entry_front = new Add_Race_Entry_Front();
 
