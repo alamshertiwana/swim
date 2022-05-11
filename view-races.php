@@ -64,7 +64,11 @@
                                     echo "<td>$race[DISTANCE]m</td>";
                                     echo "<td>$race[GENDER]</td>";
                                     echo "<td class=\"text-capitalize\">$race[STROKE]</td>";
-                                    echo '<td><a href="add-race-entry.php?race='.$race['ID'].'">Add Entry</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="view-race-result.php?race='.$race['ID'].'">View Results</a></td>';
+                                    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='admin') ){
+                                        echo '<td><a href="add-race-entry.php?race='.$race['ID'].'">Add Entry</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="view-race-result.php?race='.$race['ID'].'">View Results</a></td>';
+                                    }
+                                    else{
+                                        echo '<td><a href="view-race-result.php?race='.$race['ID'].'">View Results</a></td>';                                    }                                    
                                     echo '</tr>';
                                 }
                             ?>
