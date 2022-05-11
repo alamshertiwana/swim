@@ -15,6 +15,12 @@
 
 <?php
 
+    if( isset( $_SESSION["type"] ) && ($_SESSION["type"] =='admin') ){
+    }
+    else{
+        die("Only an admin can add races.");
+    }
+
     $view_users = new View_Users_Front();
 
     $users = $view_users->get_users();
