@@ -1,5 +1,12 @@
 <?php
   session_start();
+
+  if( isset($_SESSION['type']) ){
+  }
+  else{
+    die('Please login access the dashboard');
+  }
+
 ?>
 <!doctype html>
 <html lang="en">
