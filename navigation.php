@@ -8,6 +8,9 @@
     else if( $_SESSION['type'] == 'coach' ){
       include('template/navigation-coach.php');      
     }
+    else if( $_SESSION['type'] == 'parent' ){
+      include('template/navigation-parent.php');      
+    }
   
   }
   else{
