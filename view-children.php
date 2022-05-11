@@ -17,8 +17,11 @@
 
     $parent_id = 0;
 
-    if( isset( $_SESSION["type"] ) ){
+    if( isset( $_SESSION["type"] ) && ($_SESSION['type'] == 'parent') ){
         $parent_id = $_SESSION["ID"];        
+    }
+    else{
+        die('Only a parent can access this page');
     }
 
     $view_children = new View_Children_Front();
