@@ -75,6 +75,21 @@ class Validation_Helper {
 
     }
 
+    function is_adult($date){
+
+        $d1 = new DateTime();
+        $d2 = new DateTime($date);
+        
+        $diff = $d2->diff($d1);
+    
+        if( ($diff->y) >= 18 ){
+            return true;
+        }
+        else{
+            return false;
+        }
+
+    }
   
 }
 
